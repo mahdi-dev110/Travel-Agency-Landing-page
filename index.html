@@ -1,0 +1,1677 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahdi Travels | Explore The World</title>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2d87f0;
+            --secondary: #ff6b6b;
+            --accent: #4ecdc4;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --text: #1a1a2e;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --footer-bg: #1a1a2e;
+            --footer-text: #ffffff;
+            --input-bg: #ffffff;
+            --testimonial-bg: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --text: #f8f9fa;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --footer-bg: #0d0d0d;
+            --footer-text: #f8f9fa;
+            --input-bg: #2d2d2d;
+            --testimonial-bg: #2d2d2d;
+            --gray: #adb5bd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            box-shadow: 0 2px 15px var(--shadow-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-nav {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-nav:hover {
+            background-color: transparent;
+            outline: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-left: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .hero {
+            position: relative;
+            padding: 10rem 0 6rem;
+            color: white;
+            text-align: center;
+            height: 100vh;
+            min-height: 700px;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+        }
+
+        .hero-slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .hero-slide.active {
+            opacity: 1;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(45, 135, 240, 0.85), rgba(78, 205, 196, 0.85));
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 3.8rem;
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 1s ease;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero h1::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255, 255, 255, 0.3);
+            z-index: -1;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2.5rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero-search {
+            display: flex;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            animation: fadeInUp 1s ease;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .hero-search input {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: var(--input-bg);
+            color: var(--text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .hero-search button {
+            border-radius: 0;
+            white-space: nowrap;
+            border: none;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .stat {
+            text-align: center;
+        }
+
+        .stat h3 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .stat p {
+            font-size: 0.9rem;
+            margin: 0;
+            opacity: 0.9;
+        }
+
+        .hero-nav {
+            position: absolute;
+            bottom: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 2rem;
+            transform: translateY(50%);
+        }
+
+        .hero-prev,
+        .hero-next {
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .hero-prev:hover,
+        .hero-next:hover {
+            background: var(--primary);
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        .mouse {
+            width: 26px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            border-radius: 15px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .wheel {
+            width: 4px;
+            height: 8px;
+            background: white;
+            border-radius: 2px;
+            position: absolute;
+            top: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: scroll 2s infinite;
+        }
+
+        @keyframes scroll {
+            0% {
+                top: 8px;
+                opacity: 1;
+            }
+
+            100% {
+                top: 20px;
+                opacity: 0;
+            }
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-top: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--text);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+
+        .destinations {
+            padding: 2rem 0 5rem;
+        }
+
+        .destination-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .destination-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s ease;
+        }
+
+        .destination-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .card-img {
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .destination-card:hover .card-img img {
+            transform: scale(1.1);
+        }
+
+        .card-content {
+            padding: 1.5rem;
+        }
+
+        .card-content h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .card-content p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .card-price {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .packages {
+            padding: 5rem 0;
+            background-color: var(--bg);
+            transition: background-color 0.3s ease;
+        }
+
+        .package-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            padding: 0.8rem 1.5rem;
+            margin: 0 0.5rem 1rem;
+            background: var(--card-bg);
+            border: none;
+            border-radius: 50px;
+            font-family: inherit;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 3px 10px var(--shadow-color);
+            color: var(--text);
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn.active,
+        .tab-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .package-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .package-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s ease;
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .package-card .card-img {
+            height: 200px;
+        }
+
+        .package-info {
+            padding: 1.5rem;
+        }
+
+        .package-info h3 {
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .package-meta {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            color: var(--gray);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .package-features {
+            margin: 1.5rem 0;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+            color: var(--text);
+            transition: color 0.3s ease;
+        }
+
+        .feature-item i {
+            color: var(--primary);
+            margin-right: 0.5rem;
+        }
+
+        .package-price {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+        }
+
+        .price-amount {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-duration {
+            font-size: 0.9rem;
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+
+        .deal {
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            padding: 5rem 0;
+            color: white;
+            text-align: center;
+        }
+
+        .deal-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .deal h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .deal p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .countdown-item {
+            margin: 0 1rem;
+            min-width: 80px;
+        }
+
+        .countdown-number {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .testimonials {
+            background: var(--bg);
+            padding: 5rem 0;
+            transition: background-color 0.3s ease;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--testimonial-bg);
+            border-radius: 12px;
+            box-shadow: 0 5px 15px var(--shadow-color);
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px var(--shadow-color);
+        }
+
+        .testimonial-content p {
+            font-style: italic;
+            color: var(--text);
+            margin-bottom: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .testimonial-author img {
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid var(--primary);
+        }
+
+        .testimonial-author strong {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        .testimonial-author span {
+            color: var(--gray);
+            font-size: 0.95rem;
+            transition: color 0.3s ease;
+        }
+
+        .newsletter {
+            background: var(--primary);
+            color: white;
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .newsletter-form {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            max-width: 500px;
+            margin: 2rem auto 0;
+            flex-wrap: wrap;
+        }
+
+        .newsletter-form input[type="email"] {
+            flex: 1;
+            padding: 1rem 1.2rem;
+            border-radius: 50px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+            min-width: 220px;
+            background-color: var(--input-bg);
+            color: var(--text);
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .newsletter-form button {
+            border-radius: 50px;
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1rem;
+        }
+
+        .newsletter-message {
+            margin-top: 1rem;
+            font-size: 1.05rem;
+            min-height: 1.5em;
+        }
+
+        .newsletter-message.success {
+            color: #4ecdc4;
+        }
+
+        .newsletter-message.error {
+            color: #ffb3b3;
+        }
+
+        #scrollToTopBtn {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            z-index: 9999;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            outline: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s, opacity 0.3s;
+            opacity: 0.85;
+        }
+
+        #scrollToTopBtn:hover {
+            background: var(--secondary);
+            opacity: 1;
+        }
+
+        #scrollToTopBtn i {
+            pointer-events: none;
+        }
+
+        @media (max-width: 600px) {
+            .newsletter-form {
+                flex-direction: column;
+                gap: 0.7rem;
+            }
+
+            .newsletter-form input[type="email"],
+            .newsletter-form button {
+                width: 100%;
+                min-width: unset;
+            }
+        }
+
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 4rem 0 2rem;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: var(--gray);
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        @media (max-width: 968px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero-stats {
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero {
+                min-height: 600px;
+                padding: 8rem 0 4rem;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-search {
+                flex-direction: column;
+                border-radius: 12px;
+            }
+
+            .hero-search input {
+                border-radius: 12px 12px 0 0;
+            }
+
+            .hero-search button {
+                border-radius: 0 0 12px 12px;
+                border: none;
+            }
+
+            .hero-stats {
+                flex-wrap: wrap;
+            }
+
+            .hero-nav {
+                display: none;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .countdown-item {
+                margin: 0 0.5rem;
+                min-width: 60px;
+            }
+
+            .countdown-number {
+                font-size: 1.8rem;
+                padding: 0.7rem;
+            }
+
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1.1rem;
+            }
+
+            .stat h3 {
+                font-size: 2rem;
+            }
+        }
+
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+
+        .show-on-scroll {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1), transform 0.7s cubic-bezier(.4, 0, .2, 1);
+            will-change: opacity, transform;
+        }
+
+        .show-on-scroll.is-visible {
+            opacity: 1;
+            transform: none;
+        }
+
+        .show-on-scroll-stagger> * {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(.4, 0, .2, 1), transform 0.7s cubic-bezier(.4, 0, .2, 1);
+        }
+
+        .show-on-scroll-stagger.is-visible> * {
+            opacity: 1;
+            transform: none;
+        }
+
+        .show-on-scroll-stagger> *:nth-child(1) {
+            transition-delay: 0.05s;
+        }
+
+        .show-on-scroll-stagger> *:nth-child(2) {
+            transition-delay: 0.15s;
+        }
+
+        .show-on-scroll-stagger> *:nth-child(3) {
+            transition-delay: 0.25s;
+        }
+
+        .show-on-scroll-stagger> *:nth-child(4) {
+            transition-delay: 0.35s;
+        }
+
+        .show-on-scroll-stagger> *:nth-child(5) {
+            transition-delay: 0.45s;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header class="show-on-scroll">
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-globe-americas"></i>
+                    Mahdi Travels
+                </a>
+                <ul class="nav-links">
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="main.html#destinations">Destinations</a></li>
+                    <li><a href="main.html#packages">Packages</a></li>
+                    <li><a href="main.html#about-us">About Us</a></li>
+                    <li>
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+                <a href="book.html" class="btn btn-nav">Book Now</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero show-on-scroll">
+        <div class="hero-background">
+            <div class="hero-slide active"
+                style="background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-attachment: fixed;">
+            </div>
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-attachment: fixed;">
+            </div>
+            <div class="hero-slide"
+                style="background-image: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80'); background-attachment: fixed;">
+            </div>
+            <div class="hero-overlay"></div>
+        </div>
+
+        <div class="container">
+            <div class="hero-content show-on-scroll">
+                <h1 data-text="Discover The World's Beauty" class="show-on-scroll">Discover The World's Beauty</h1>
+                <p class="show-on-scroll">Explore unique destinations with our exclusive travel packages and create memories that last a
+                    lifetime.</p>
+                <div class="hero-search show-on-scroll">
+                    <input type="text" placeholder="Where would you like to go?">
+                    <button class="btn btn-primary">Explore Destinations</button>
+                </div>
+                <div class="hero-stats show-on-scroll-stagger">
+                    <div class="stat">
+                        <h3>15K+</h3>
+                        <p>Happy Travelers</p>
+                    </div>
+                    <div class="stat">
+                        <h3>120+</h3>
+                        <p>Destinations</p>
+                    </div>
+                    <div class="stat">
+                        <h3>98%</h3>
+                        <p>Positive Reviews</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="hero-nav show-on-scroll">
+            <button class="hero-prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="hero-next"><i class="fas fa-chevron-right"></i></button>
+        </div>
+
+        <div class="scroll-indicator show-on-scroll">
+            <span>Scroll Down</span>
+            <div class="mouse">
+                <div class="wheel"></div>
+            </div>
+        </div>
+    </section>
+    <!-- Destinations Section -->
+    <section class="destinations show-on-scroll" id="destinations">
+        <div class="container">
+            <div class="section-title show-on-scroll">
+                <h2 class="show-on-scroll">Popular Destinations</h2>
+                <p class="show-on-scroll">Discover the most amazing places around the world</p>
+            </div>
+            <div class="destination-grid show-on-scroll-stagger">
+                <!-- Destination Card 1 -->
+                <div class="destination-card show-on-scroll">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Bali, Indonesia">
+                    </div>
+                    <div class="card-content">
+                        <h3>Bali, Indonesia</h3>
+                        <p>Experience the perfect blend of culture, beaches, and nightlife.</p>
+                        <div class="card-price">From $899</div>
+                    </div>
+                    <div class="card-badge">Popular</div>
+                </div>
+                <!-- Destination Card 2 -->
+                <div class="destination-card show-on-scroll">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Santorini, Greece">
+                    </div>
+                    <div class="card-content">
+                        <h3>Santorini, Greece</h3>
+                        <p>White-washed buildings and breathtaking views of the Aegean Sea.</p>
+                        <div class="card-price">From $1,199</div>
+                    </div>
+                </div>
+                <!-- Destination Card 3 -->
+                <div class="destination-card show-on-scroll">
+                    <div class="card-img">
+                        <img src="https://i.pinimg.com/1200x/a0/61/1a/a0611ac6cba4630c95a75abc5e8e1db7.jpg"
+                            alt="Swiss Alps">
+                    </div>
+                    <div class="card-content">
+                        <h3>Swiss Alps</h3>
+                        <p>Majestic mountains, crystal clear lakes, and charming villages.</p>
+                        <div class="card-price">From $1,499</div>
+                    </div>
+                    <div class="card-badge">New</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Packages Section -->
+    <section class="packages show-on-scroll" id="packages">
+        <div class="container">
+            <div class="section-title show-on-scroll">
+                <h2 class="show-on-scroll">Travel Packages</h2>
+                <p class="show-on-scroll">Find the perfect package for your next adventure</p>
+            </div>
+
+            <div class="package-tabs show-on-scroll-stagger">
+                <button class="tab-btn active show-on-scroll" data-filter="all">All Packages</button>
+                <button class="tab-btn show-on-scroll" data-filter="beach">Beach</button>
+                <button class="tab-btn show-on-scroll" data-filter="mountain">Mountain</button>
+                <button class="tab-btn show-on-scroll" data-filter="cultural">Cultural</button>
+                <button class="tab-btn show-on-scroll" data-filter="luxury">Luxury</button>
+            </div>
+
+            <div class="package-grid show-on-scroll-stagger">
+                <!-- Package Card 1 -->
+                <div class="package-card show-on-scroll" data-category="beach">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Maldives Paradise">
+                        <div class="card-badge">Best Seller</div>
+                    </div>
+                    <div class="package-info">
+                        <h3>Maldives Paradise</h3>
+                        <div class="package-meta">
+                            <span><i class="far fa-clock"></i> 7 Days</span>
+                            <span><i class="fas fa-user-friends"></i> 2 People</span>
+                        </div>
+                        <p>Experience the ultimate luxury in overwater bungalows with crystal clear waters.</p>
+                        <div class="package-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Private Overwater Villa
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> All Meals Included
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Snorkeling & Spa Access
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <div>
+                                <div class="price-amount">$2,499</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package Card 2 -->
+                <div class="package-card show-on-scroll" data-category="mountain">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Alpine Adventure">
+                    </div>
+                    <div class="package-info">
+                        <h3>Alpine Adventure</h3>
+                        <div class="package-meta">
+                            <span><i class="far fa-clock"></i> 5 Days</span>
+                            <span><i class="fas fa-user-friends"></i> 4 People</span>
+                        </div>
+                        <p>Thrilling mountain experience with hiking, climbing and breathtaking views.</p>
+                        <div class="package-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Guided Hiking Tours
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Mountain Cabin Stay
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Equipment Rental
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <div>
+                                <div class="price-amount">$1,199</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package Card 3 -->
+                <div class="package-card show-on-scroll" data-category="cultural">
+                    <div class="card-img">
+                        <img src="https://i.pinimg.com/736x/de/d9/36/ded936b974fbc7dc50011bbce930f22e.jpg"
+                            alt="Japanese Cultural Journey">
+                        <div class="card-badge">New</div>
+                    </div>
+                    <div class="package-info">
+                        <h3>Japanese Cultural Journey</h3>
+                        <div class="package-meta">
+                            <span><i class="far fa-clock"></i> 10 Days</span>
+                            <span><i class="fas fa-user-friends"></i> 2 People</span>
+                        </div>
+                        <p>Immerse yourself in traditional Japanese culture from temples to tea ceremonies.</p>
+                        <div class="package-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Traditional Ryokan Stay
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Cultural Workshops
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Local Guide Included
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <div>
+                                <div class="price-amount">$3,299</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package Card 4 -->
+                <div class="package-card show-on-scroll" data-category="luxury">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Italian Luxury Tour">
+                    </div>
+                    <div class="package-info">
+                        <h3>Italian Luxury Tour</h3>
+                        <div class="package-meta">
+                            <span><i class="far fa-clock"></i> 8 Days</span>
+                            <span><i class="fas fa-user-friends"></i> 2 People</span>
+                        </div>
+                        <p>Experience la dolce vita with luxury accommodations and private tours.</p>
+                        <div class="package-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> 5-Star Hotels
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Private Wine Tasting
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Gourmet Dining
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <div>
+                                <div class="price-amount">$4,599</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package Card 5 -->
+                <div class="package-card show-on-scroll" data-category="beach">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Caribbean Escape">
+                    </div>
+                    <div class="package-info">
+                        <h3>Caribbean Escape</h3>
+                        <div class="package-meta">
+                            <span><i class="far fa-clock"></i> 6 Days</span>
+                            <span><i class="fas fa-user-friends"></i> 2 People</span>
+                        </div>
+                        <p>Relax on pristine beaches and enjoy the vibrant Caribbean culture.</p>
+                        <div class="package-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Beachfront Resort
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Island Hopping Tour
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> All-Inclusive
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <div>
+                                <div class="price-amount">$1,899</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- Package Card 6 -->
+                <div class="package-card show-on-scroll" data-category="mountain">
+                    <div class="card-img">
+                        <img src="https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
+                            alt="Rocky Mountain Expedition">
+                        <div class="card-badge">Adventure</div>
+                    </div>
+                    <div class="package-info">
+                        <h3>Rocky Mountain Expedition</h3>
+                        <div class="package-meta">
+                            <span><i class="far fa-clock"></i> 7 Days</span>
+                            <span><i class="fas fa-user-friends"></i> 6 People</span>
+                        </div>
+                        <p>Challenge yourself with this adventurous expedition through majestic mountains.</p>
+                        <div class="package-features">
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Expert Guides
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Camping Equipment
+                            </div>
+                            <div class="feature-item">
+                                <i class="fas fa-check"></i> Wildlife Spotting
+                            </div>
+                        </div>
+                        <div class="package-price">
+                            <div>
+                                <div class="price-amount">$1,499</div>
+                                <div class="price-duration">per person</div>
+                            </div>
+                            <a href="#" class="btn btn-primary">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Deal of the Day -->
+    <section class="deal show-on-scroll">
+        <div class="container">
+            <div class="deal-content show-on-scroll">
+                <h2 class="show-on-scroll">Special Deal of the Day</h2>
+                <p class="show-on-scroll">Book your dream vacation to Paris today and get 30% off! Limited time offer.</p>
+                <div class="countdown show-on-scroll-stagger">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Days</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Hours</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minutes</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Seconds</div>
+                    </div>
+                </div>
+                <a href="#" class="btn btn-primary show-on-scroll">Grab This Deal</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials show-on-scroll">
+        <div class="container">
+            <div class="section-title show-on-scroll">
+                <h2 class="show-on-scroll">What Our Travelers Say</h2>
+                <p class="show-on-scroll">Real experiences from our happy customers</p>
+            </div>
+            <div class="testimonials-grid show-on-scroll-stagger">
+                <div class="testimonial-card show-on-scroll">
+                    <div class="testimonial-content">
+                        <p>"Mahdi made our honeymoon in Bali absolutely unforgettable! The service was top-notch
+                            and every detail was taken care of."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah">
+                        <div>
+                            <strong>Sarah M.</strong><br>
+                            <span>Bali, Indonesia</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card show-on-scroll">
+                    <div class="testimonial-content">
+                        <p>"The Alpine Adventure package was a dream come true. Our guide was knowledgeable and the
+                            scenery was breathtaking!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="James">
+                        <div>
+                            <strong>James L.</strong><br>
+                            <span>Swiss Alps</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card show-on-scroll">
+                    <div class="testimonial-content">
+                        <p>"From booking to the actual trip, everything was seamless. Highly recommend Mahdi for
+                            stress-free travel."</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Priya">
+                        <div>
+                            <strong>Priya S.</strong><br>
+                            <span>Maldives</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter show-on-scroll">
+        <div class="container">
+            <div class="section-title show-on-scroll">
+                <h2 class="show-on-scroll">Subscribe to Our Newsletter</h2>
+                <p class="show-on-scroll">Get the latest travel deals, tips, and inspiration straight to your inbox!</p>
+            </div>
+            <form id="newsletterForm" class="newsletter-form show-on-scroll" autocomplete="off" novalidate>
+                <input type="email" id="newsletterEmail" placeholder="Enter your email address" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <div id="newsletterMessage" class="newsletter-message show-on-scroll"></div>
+        </div>
+    </section>
+
+    <button id="scrollToTopBtn" title="Back to top" style="display:none;">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <!-- Footer -->
+    <footer id="about-us" class="show-on-scroll">
+        <div class="container">
+            <div class="footer-content show-on-scroll-stagger">
+                <div class="footer-column show-on-scroll">
+                    <h3>About Mahdi</h3>
+                    <p>Mahdi Travels is a premier travel agency dedicated to creating unforgettable experiences and
+                        helping you explore the world's most beautiful destinations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column show-on-scroll">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Destinations</a></li>
+                        <li><a href="#">Packages</a></li>
+                        <li><a href="#">Special Offers</a></li>
+                        <li><a href="#">Travel Guides</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column show-on-scroll">
+                    <h3>Popular Destinations</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Bali, Indonesia</a></li>
+                        <li><a href="#">Santorini, Greece</a></li>
+                        <li><a href="#">Swiss Alps</a></li>
+                        <li><a href="#">Maldives</a></li>
+                        <li><a href="#">Tokyo, Japan</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column show-on-scroll">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Travel Street, Tourism City</li>
+                        <li><i class="fas fa-phone"></i> +92 335 0307974</li>
+                        <li><i class="fas fa-envelope"></i> syedmuntazirmahdishah31.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright show-on-scroll">
+                <p>&copy; 2025 Mahdi Travels. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        // Theme Toggle Functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = themeToggle.querySelector('i');
+        const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeIcon.classList.remove('fa-moon');
+            themeIcon.classList.add('fa-sun');
+        } else {
+            document.documentElement.removeAttribute('data-theme');
+            themeIcon.classList.remove('fa-sun');
+            themeIcon.classList.add('fa-moon');
+        }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            }
+        });
+
+        // Countdown timer for deal of the day
+        function updateCountdown() {
+            const countDownDate = new Date();
+            countDownDate.setDate(countDownDate.getDate() + 3); // 3 days from now
+            const x = setInterval(function () {
+                const now = new Date().getTime();
+                const distance = countDownDate - now;
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+                document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+                if (distance < 0) {
+                    clearInterval(x);
+                    document.getElementById("days").innerHTML = "00";
+                    document.getElementById("hours").innerHTML = "00";
+                    document.getElementById("minutes").innerHTML = "00";
+                    document.getElementById("seconds").innerHTML = "00";
+                }
+            }, 1000);
+        }
+        updateCountdown();
+
+        // Package filtering
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const packageCards = document.querySelectorAll('.package-card');
+        tabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const filter = button.getAttribute('data-filter');
+                if (filter === 'all') {
+                    packageCards.forEach(card => { card.style.display = 'block'; });
+                } else {
+                    packageCards.forEach(card => { card.style.display = 'none'; });
+                    const filteredCards = document.querySelectorAll(`.package-card[data-category="${filter}"]`);
+                    filteredCards.forEach(card => { card.style.display = 'block'; });
+                }
+            });
+        });
+
+        // Hero Slider Functionality
+        const heroSlides = document.querySelectorAll('.hero-slide');
+        const heroPrevBtn = document.querySelector('.hero-prev');
+        const heroNextBtn = document.querySelector('.hero-next');
+        let currentSlide = 0;
+        function showSlide(index) {
+            heroSlides.forEach(slide => slide.classList.remove('active'));
+            if (index >= heroSlides.length) {
+                currentSlide = 0;
+            } else if (index < 0) {
+                currentSlide = heroSlides.length - 1;
+            } else {
+                currentSlide = index;
+            }
+            heroSlides[currentSlide].classList.add('active');
+        }
+        function nextSlide() { showSlide(currentSlide + 1); }
+        function prevSlide() { showSlide(currentSlide - 1); }
+        if (heroNextBtn && heroPrevBtn) {
+            heroNextBtn.addEventListener('click', nextSlide);
+            heroPrevBtn.addEventListener('click', prevSlide);
+        }
+        setInterval(nextSlide, 5000);
+
+        // Newsletter form submission
+        document.getElementById('newsletterForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('newsletterEmail');
+            const messageDiv = document.getElementById('newsletterMessage');
+            const email = emailInput.value.trim();
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!email) {
+                messageDiv.textContent = "Please enter your email address.";
+                messageDiv.className = "newsletter-message error";
+                emailInput.focus();
+                return;
+            }
+            if (!emailPattern.test(email)) {
+                messageDiv.textContent = "Please enter a valid email address.";
+                messageDiv.className = "newsletter-message error";
+                emailInput.focus();
+                return;
+            }
+            messageDiv.textContent = "Thank you for subscribing!";
+            messageDiv.className = "newsletter-message success";
+            emailInput.value = "";
+        });
+
+        // Scroll To Top Button Logic
+        const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+        window.addEventListener('scroll', function () {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.style.display = 'block';
+            } else {
+                scrollToTopBtn.style.display = 'none';
+            }
+        });
+        scrollToTopBtn.addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Show Up On Scroll Animation
+        function onScrollShowUp() {
+            const showEls = document.querySelectorAll('.show-on-scroll, .show-on-scroll-stagger');
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            },
+            {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            });
+            showEls.forEach(el => observer.observe(el));
+        }
+
+        // Initialize show on scroll animations
+        onScrollShowUp();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Your Trip - Mahdi Travels</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2d87f0;
+            --secondary: #ff6b6b;
+            --accent: #4ecdc4;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --text: #1a1a2e;
+            --bg: #f8f9fa;
+            --card-bg: #ffffff;
+            --header-bg: rgba(255, 255, 255, 0.95);
+            --shadow-color: rgba(0, 0, 0, 0.1);
+            --footer-bg: #1a1a2e;
+            --footer-text: #ffffff;
+            --input-bg: #ffffff;
+        }
+
+        [data-theme="dark"] {
+            --text: #f8f9fa;
+            --bg: #121212;
+            --card-bg: #1e1e1e;
+            --header-bg: rgba(30, 30, 30, 0.95);
+            --shadow-color: rgba(0, 0, 0, 0.3);
+            --footer-bg: #0d0d0d;
+            --footer-text: #f8f9fa;
+            --input-bg: #2d2d2d;
+            --gray: #adb5bd;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--bg);
+            overflow-x: hidden;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            background-color: var(--header-bg);
+            box-shadow: 0 2px 15px var(--shadow-color);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            transition: background-color 0.3s;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+        }
+
+        .logo i {
+            margin-right: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+        }
+
+        .nav-links a {
+            
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .btn-nav {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-nav:hover {
+            background-color: transparent;
+            outline: 2px solid var(--primary);
+            color: var(--primary);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .theme-toggle {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: var(--text);
+            margin-left: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 10px var(--shadow-color);
+            transition: all 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px var(--shadow-color);
+        }
+
+        .booking-section {
+            padding: 8rem 0 5rem;
+            background: linear-gradient(135deg, rgba(45, 135, 240, 0.8), rgba(78, 205, 196, 0.8)), url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            min-height: 100vh;
+        }
+
+        .booking-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .booking-form {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 2.5rem;
+            box-shadow: 0 15px 30px var(--shadow-color);
+            width: 100%;
+            max-width: 700px;
+            color: var(--text);
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .form-title {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.8rem 1.2rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            background-color: var(--input-bg);
+            color: var(--text);
+            transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s, color 0.3s;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(45, 135, 240, 0.2);
+        }
+
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.8rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: none;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            background-color: #1a73e8;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--gray);
+        }
+
+        .form-footer a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 4rem 0 2rem;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--primary);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: #ccc;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: background 0.3s;
+        }
+
+        .social-links a:hover {
+            background: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: #ccc;
+            font-size: 0.9rem;
+        }
+
+        #scrollToTopBtn {
+            position: fixed;
+            right: 30px;
+            bottom: 30px;
+            z-index: 9999;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            outline: none;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: background 0.3s, opacity 0.3s;
+            opacity: 0.85;
+            display: none;
+        }
+
+        #scrollToTopBtn:hover {
+            background: var(--secondary);
+            opacity: 1;
+        }
+
+        #scrollToTopBtn i {
+            pointer-events: none;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+
+            .booking-form {
+                padding: 1.5rem;
+            }
+        }
+
+        .form-input.error,
+        .form-select.error {
+            border-color: var(--secondary);
+        }
+
+        .error-message {
+            color: var(--secondary);
+            font-size: 0.8rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .form-input.error+.error-message,
+        .form-select.error+.error-message {
+            display: block;
+        }
+
+        .success-message {
+            background-color: #4ecdc4;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header & Navigation -->
+    <header>
+        <div class="container">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-globe-americas"></i>
+                    Mahdi
+                </a>
+                <ul class="nav-links">
+                    <li><a href="main.html">Home</a></li>
+                    <li><a href="main.html#destinations">Destinations</a></li>
+                    <li><a href="main.html#packages">Packages</a></li>
+                    <li><a href="main.html#about-us">About Us</a></li>
+                    <li>
+                        <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+                            <i class="fas fa-moon"></i>
+                        </button>
+                    </li>
+                </ul>
+                <a href="#" class="btn btn-nav">Thanks😊👍</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Booking Form Section -->
+    <section class="booking-section">
+        <div class="container booking-container">
+            <form class="booking-form" id="bookingForm">
+                <h2 class="form-title">Book Your Dream Vacation</h2>
+
+                <div id="successMessage" class="success-message">
+                    Thank you for your booking! We'll contact you shortly to confirm your trip details.
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName" class="form-label">First Name</label>
+                        <input type="text" id="firstName" class="form-input" placeholder="Your first name">
+                        <div class="error-message">Please enter your first name</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="lastName" class="form-label">Last Name</label>
+                        <input type="text" id="lastName" class="form-input" placeholder="Your last name">
+                        <div class="error-message">Please enter your last name</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <input type="email" id="email" class="form-input" placeholder="your.email@example.com">
+                    <div class="error-message">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone" class="form-label">Phone Number</label>
+                    <input type="tel" id="phone" class="form-input" placeholder="Your phone number">
+                    <div class="error-message">Please enter a valid phone number</div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="destination" class="form-label">Destination</label>
+                        <select id="destination" class="form-select">
+                            <option value="">Select a destination</option>
+                            <option value="bali">Bali, Indonesia</option>
+                            <option value="santorini">Santorini, Greece</option>
+                            <option value="swiss-alps">Swiss Alps</option>
+                            <option value="paris">Paris, France</option>
+                            <option value="tokyo">Tokyo, Japan</option>
+                            <option value="maldives">Maldives</option>
+                        </select>
+                        <div class="error-message">Please select a destination</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="travelers" class="form-label">Number of Travelers</label>
+                        <select id="travelers" class="form-select">
+                            <option value="">Select number</option>
+                            <option value="1">1 Person</option>
+                            <option value="2">2 People</option>
+                            <option value="3">3 People</option>
+                            <option value="4">4 People</option>
+                            <option value="5+">5+ People</option>
+                        </select>
+                        <div class="error-message">Please select number of travelers</div>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="departure" class="form-label">Departure Date</label>
+                        <input type="date" id="departure" class="form-input">
+                        <div class="error-message">Please select a departure date</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="return" class="form-label">Return Date</label>
+                        <input type="date" id="return" class="form-input">
+                        <div class="error-message">Please select a return date</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="accommodation" class="form-label">Accommodation Type</label>
+                    <select id="accommodation" class="form-select">
+                        <option value="">Select accommodation type</option>
+                        <option value="economy">Economy (3-star)</option>
+                        <option value="comfort">Comfort (4-star)</option>
+                        <option value="luxury">Luxury (5-star)</option>
+                        <option value="villa">Private Villa</option>
+                        <option value="resort">All-Inclusive Resort</option>
+                    </select>
+                    <div class="error-message">Please select accommodation type</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="message" class="form-label">Special Requests</label>
+                    <textarea id="message" class="form-textarea" rows="3"
+                        placeholder="Any special requests or requirements..."></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Confirm Booking</button>
+
+                <div class="form-footer">
+                    By submitting this form, you agree to our <a href="#">Terms & Conditions</a> and <a href="#">Privacy
+                        Policy</a>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!--footer-->
+       <footer id="about-us">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Mahdi</h3>
+                    <p>Mahdi Travels is a premier travel agency dedicated to creating unforgettable experiences and
+                        helping you explore the world's most beautiful destinations.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Destinations</a></li>
+                        <li><a href="#">Packages</a></li>
+                        <li><a href="#">Special Offers</a></li>
+                        <li><a href="#">Travel Guides</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Popular Destinations</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Bali, Indonesia</a></li>
+                        <li><a href="#">Santorini, Greece</a></li>
+                        <li><a href="#">Swiss Alps</a></li>
+                        <li><a href="#">Maldives</a></li>
+                        <li><a href="#">Tokyo, Japan</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <ul class="footer-links">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Travel Street, Tourism City</li>
+                        <li><i class="fas fa-phone"></i> +1 (555) 123-4567</li>
+                        <li><i class="fas fa-envelope"></i> info@Mahdi.com</li>
+                        <li><i class="fas fa-clock"></i> Mon-Fri: 9AM - 6PM</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="copyright">
+                <p>&copy; 2025 Mahdi Travels. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scrollToTopBtn" title="Back to top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('bookingForm');
+            const successMessage = document.getElementById('successMessage');
+
+            // Set minimum date for departure to today
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+
+            const departureInput = document.getElementById('departure');
+            const returnInput = document.getElementById('return');
+
+            const yyyy = today.getFullYear();
+            const mm = String(today.getMonth() + 1).padStart(2, '0');
+            const dd = String(today.getDate()).padStart(2, '0');
+            const todayStr = `${yyyy}-${mm}-${dd}`;
+
+            const tomorrowStr = `${yyyy}-${mm}-${String(today.getDate() + 1).padStart(2, '0')}`;
+
+            departureInput.setAttribute('min', todayStr);
+            returnInput.setAttribute('min', tomorrowStr);
+
+            // Update return date min when departure changes
+            departureInput.addEventListener('change', function () {
+                if (this.value) {
+                    const minReturnDate = new Date(this.value);
+                    minReturnDate.setDate(minReturnDate.getDate() + 1);
+
+                    const minReturnYear = minReturnDate.getFullYear();
+                    const minReturnMonth = String(minReturnDate.getMonth() + 1).padStart(2, '0');
+                    const minReturnDay = String(minReturnDate.getDate()).padStart(2, '0');
+
+                    returnInput.setAttribute('min', `${minReturnYear}-${minReturnMonth}-${minReturnDay}`);
+
+                    // If return date is before new min date, clear it
+                    if (returnInput.value && new Date(returnInput.value) < minReturnDate) {
+                        returnInput.value = '';
+                    }
+                }
+            });
+
+            // Form validation and submission
+            form.addEventListener('submit', function (e) {
+                e.preventDefault();
+                let isValid = true;
+
+                // Reset error states
+                const inputs = form.querySelectorAll('.form-input, .form-select');
+                inputs.forEach(input => {
+                    input.classList.remove('error');
+                });
+
+                // Validate required fields
+                const requiredFields = [
+                    'firstName', 'lastName', 'email', 'phone',
+                    'destination', 'travelers', 'departure', 'return', 'accommodation'
+                ];
+
+                requiredFields.forEach(fieldId => {
+                    const field = document.getElementById(fieldId);
+                    if (!field.value.trim()) {
+                        field.classList.add('error');
+                        isValid = false;
+                    }
+                });
+
+                // Validate email format
+                const emailField = document.getElementById('email');
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (emailField.value && !emailRegex.test(emailField.value)) {
+                    emailField.classList.add('error');
+                    isValid = false;
+                }
+
+                // Validate phone format (basic)
+                const phoneField = document.getElementById('phone');
+                if (phoneField.value && phoneField.value.replace(/\D/g, '').length < 10) {
+                    phoneField.classList.add('error');
+                    isValid = false;
+                }
+
+                // Validate return date is after departure
+                if (departureInput.value && returnInput.value) {
+                    const departureDate = new Date(departureInput.value);
+                    const returnDate = new Date(returnInput.value);
+
+                    if (returnDate <= departureDate) {
+                        returnInput.classList.add('error');
+                        isValid = false;
+                    }
+                }
+
+                if (isValid) {
+                    // In a real application, you would send the form data to a server here
+                    // For this example, we'll just show a success message
+                    successMessage.style.display = 'block';
+                    form.reset();
+
+                    // Scroll to success message
+                    successMessage.scrollIntoView({ behavior: 'smooth' });
+
+                    // Hide success message after 5 seconds
+                    setTimeout(() => {
+                        successMessage.style.display = 'none';
+                    }, 5000);
+                }
+            });
+
+            // Remove error state when user starts typing
+            const formFields = form.querySelectorAll('.form-input, .form-select');
+            formFields.forEach(field => {
+                field.addEventListener('input', function () {
+                    if (this.classList.contains('error')) {
+                        this.classList.remove('error');
+                    }
+                });
+            });
+
+            // Theme Toggle Functionality
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = themeToggle.querySelector('i');
+
+            // Check for saved theme preference or respect OS preference
+            const savedTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+
+            // Apply the saved theme
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                themeIcon.classList.remove('fa-moon');
+                themeIcon.classList.add('fa-sun');
+            } else {
+                document.documentElement.removeAttribute('data-theme');
+                themeIcon.classList.remove('fa-sun');
+                themeIcon.classList.add('fa-moon');
+            }
+
+            // Toggle theme on button click
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.removeAttribute('data-theme');
+                    localStorage.setItem('theme', 'light');
+                    themeIcon.classList.remove('fa-sun');
+                    themeIcon.classList.add('fa-moon');
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeIcon.classList.remove('fa-moon');
+                    themeIcon.classList.add('fa-sun');
+                }
+            });
+
+            // Scroll To Top Button Logic
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.style.display = 'block';
+                } else {
+                    scrollToTopBtn.style.display = 'none';
+                }
+            });
+            scrollToTopBtn.addEventListener('click', function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+    </script>
+</body>
+
+</html>
