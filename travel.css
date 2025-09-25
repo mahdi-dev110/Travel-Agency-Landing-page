@@ -1136,4 +1136,7 @@ footer {
     .stat h3 {
         font-size: 2rem;
     }
+    .logo{
+        font-size: 15px;
+    }
 }
